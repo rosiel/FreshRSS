@@ -39,6 +39,10 @@ class Minz_ExtensionManager {
 			'list' => array(),
 			'signature' => 'PassArguments',
 		),
+		'entry_after_favourite' => array(  // function($entry, $is_favourite) -> none
+                        'list' => array(),
+                        'signature' => 'PassArguments',
+                ),
 	);
 	private static $ext_to_hooks = array();
 
