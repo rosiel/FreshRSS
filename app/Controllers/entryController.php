@@ -131,7 +131,12 @@ class FreshRSS_entry_Controller extends Minz_ActionController {
 		$is_favourite = (bool)Minz_Request::param('is_favorite', true);
 		if ($id !== false) {
 			$entryDAO = FreshRSS_Factory::createEntryDao();
-			$entryDAO->markFavorite($id, $is_favourite);
+			$success = $entryDAO->markFavorite($id, $is_favourite);
+			if ($success) {
+				Minz_ExtensionManager::init();
+				$entry = Minz_ExtensionManager::callHook('entry_after_favourite', $id, $is_favourite);
+			}
+
 		}
 
 		if (!$this->ajax) {
